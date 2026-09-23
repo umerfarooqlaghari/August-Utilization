@@ -10,6 +10,7 @@ import {
   type ScenarioKey,
   type EngineModel,
 } from "./engine/data";
+import EngineVisualizer from "./engine/EngineVisualizer";
 
 // ─── Formatting ───────────────────────────────────────────────────────────────
 const h = (n: number, dp = 1) =>
@@ -472,6 +473,7 @@ interface ForecastEngineProps { period: string }
 export default function ForecastEngine({ period: _period }: ForecastEngineProps) {
   const [step, setStep] = useState(0);
   const [scenarioKey, setScenarioKey] = useState<ScenarioKey>("overrun");
+  const [showViz, setShowViz] = useState(true);
 
   const sc = SCENARIOS[scenarioKey];
   const model = useMemo(() => buildModel(sc), [sc]);
@@ -480,16 +482,44 @@ export default function ForecastEngine({ period: _period }: ForecastEngineProps)
     <div style={{ padding: "24px 28px 56px", maxWidth: 1200, display: "flex", flexDirection: "column", gap: 20 }}>
 
       {/* Intro */}
-      <div>
-        <div style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 19, color: C.ink, marginBottom: 6 }}>
-          How the forecast works
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
+        <div>
+          <div style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 19, color: C.ink, marginBottom: 6 }}>
+            How the forecast works
+          </div>
+          <div style={{ fontFamily: C.sans, fontSize: 12.5, color: C.graphite, lineHeight: 1.7, maxWidth: 560 }}>
+            Six steps, from the resourcing template to a staffing decision. Every
+            figure is calculated live — change a scenario and everything downstream
+            moves with it.
+          </div>
         </div>
-        <div style={{ fontFamily: C.sans, fontSize: 12.5, color: C.graphite, lineHeight: 1.7, maxWidth: 620 }}>
-          Six steps, from the resourcing template to a staffing decision. Every
-          figure is calculated live — change a scenario and everything downstream
-          moves with it.
-        </div>
+        <button
+          onClick={() => setShowViz((v) => !v)}
+          style={{
+            flexShrink: 0,
+            fontFamily: C.sans, fontSize: 11.5, fontWeight: 500,
+            color: showViz ? C.paper : C.slate,
+            background: showViz ? C.ink : C.paper,
+            border: `1px solid ${showViz ? C.ink : C.hairline}`,
+            borderRadius: 6, padding: "6px 14px", cursor: "pointer",
+            transition: "background 0.15s, color 0.15s",
+            whiteSpace: "nowrap" as const,
+            marginTop: 4,
+          }}
+        >
+          {showViz ? "Hide" : "Show"} Model Visualization
+        </button>
       </div>
+
+      {/* Model Visualizer */}
+      {showViz && (
+        <EngineVisualizer
+          model={model}
+          activeStep={step}
+          scenarioKey={scenarioKey}
+          onStepClick={setStep}
+        />
+      )}
 
       {/* Scenario selector */}
       <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>

@@ -215,6 +215,7 @@ export default function Sidebar({ active, onNavigate, collapsed, onToggleCollaps
       >
         {collapsed ? (
           <div
+            title="August Leadership Utilization Dashboard"
             style={{
               width: 30,
               height: 30,
@@ -243,14 +244,14 @@ export default function Sidebar({ active, onNavigate, collapsed, onToggleCollaps
             </div>
             <div style={{
               fontFamily: "'IBM Plex Sans', sans-serif",
-              fontSize: 7.5,
-              fontWeight: 500,
-              color: "rgba(122,149,168,0.7)",
-              letterSpacing: "0.14em",
+              fontSize: 8,
+              fontWeight: 600,
+              color: "rgba(122,149,168,0.9)",
+              letterSpacing: "0.12em",
               textTransform: "uppercase",
               whiteSpace: "nowrap",
             }}>
-              Search &amp; Leadership Advisory
+              Utilization Dashboard
             </div>
           </div>
         )}
