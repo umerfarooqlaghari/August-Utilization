@@ -5,17 +5,19 @@ import ControlCenter from "./components/ControlCenter";
 import Projects from "./components/Projects";
 import UtilizationIntelligence from "./components/UtilizationIntelligence";
 import Prediction from "./components/Prediction";
+import ForecastEngine from "./components/ForecastEngine";
 import Setup from "./components/setup/Setup";
 import StyleGuide from "./components/StyleGuide";
 import { useViewport } from "./hooks/useViewport";
 
-export type Module = "control" | "projects" | "utilization" | "prediction" | "setup" | "styleguide";
+export type Module = "control" | "projects" | "utilization" | "prediction" | "engine" | "setup" | "styleguide";
 
 const MODULE_TITLES: Record<Module, string> = {
   control:     "Control Center",
   projects:    "Projects",
   utilization: "Utilization Intelligence",
   prediction:  "Prediction",
+  engine:      "Forecast Engine",
   setup:       "Setup",
   styleguide:  "Style Guide",
 };
@@ -51,6 +53,7 @@ export default function App() {
           {activeModule === "projects"    && <Projects period={period} />}
           {activeModule === "utilization" && <UtilizationIntelligence period={period} />}
           {activeModule === "prediction"  && <Prediction period={period} />}
+          {activeModule === "engine"      && <ForecastEngine period={period} />}
           {activeModule === "setup"       && <Setup />}
           {activeModule === "styleguide"  && <StyleGuide />}
         </main>

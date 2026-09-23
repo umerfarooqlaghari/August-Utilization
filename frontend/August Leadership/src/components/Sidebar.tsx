@@ -42,6 +42,18 @@ const WORKSPACE_ITEMS: NavItem[] = [
       </svg>
     ),
   },
+  {
+    id: "engine",
+    label: "Forecast Engine",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v18h18" />
+        <path d="M7 15l4-5 3 3 5-7" />
+        <circle cx="11" cy="10" r="1.2" fill="currentColor" stroke="none" />
+        <circle cx="14" cy="13" r="1.2" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
 ];
 
 const SYSTEM_ITEMS: NavItem[] = [
